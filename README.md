@@ -3,4 +3,3 @@ Proyek pembuatan invetaris kantor sederhana menggunakan [CodeIgniter 2.2](http:/
 # Kontributor
 1. alex
 2. salman
-# enjoy 
