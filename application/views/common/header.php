@@ -17,6 +17,10 @@
 
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url('bootstrap/css/theme.css');?>" rel="stylesheet">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="<?php echo base_url('bootstrap/js/bootstrap.min.js');?>"></script>
+    <script src="<?php echo base_url('bootstrap/js/bootstrap-datepicker.js');?>"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
