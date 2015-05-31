@@ -34,7 +34,7 @@
       
       <div class="form-group">
       <label for="category">Category</label>
-      <select id="category" name="category">
+      <select id="category" name="category" class="form-control">
           <option value="0">--Please Select--</option>
           <?php foreach($categories as $category): ?>
           <option value="<?php echo $category->id; ?>"><?php echo $category->name; ?></option>
@@ -68,12 +68,12 @@
       
       <div class='form-group'>
           <label for='purchase_date'>Purchase Date</label>
-          <input name='purchase_date' data-provide="datepicker" id='purchase_date' class='datepicker'/>
+          <input name='purchase_date' data-provide="datepicker" id='purchase_date' class='datepicker form-control'/>
       </div>
       
       <div class='form-group'>
           <label for='purchase_price'>Purchase Price</label>
-          <input name='purchase_price' id='purchase_price' class='datapicker'/>
+          <input name='purchase_price' id='purchase_price' class='form-control'/>
       </div>
 
       <input type="hidden" name="userlogin" value="<?php echo $userlogin; ?>"/>
@@ -81,10 +81,4 @@
       <button type="submit" class="btn btn-success"><?php echo $this->lang->line('common_form_elements_go');?></button>  or <? echo anchor('users',$this->lang->line('common_form_elements_cancel'));?>
     </div>
 <?php echo form_close() ; ?>
-  </div>
 </div>
-
-
-
-
-        
