@@ -19,7 +19,7 @@
 class Assignment extends MY_Controller {
     public function __construct() {
         parent::__construct();
-        $this->load->model('signing_model','msign');
+        $this->load->model('assignment_model','msign');
     }
     
     public function index() {
