@@ -35,7 +35,7 @@
       <div class="form-group">
       <label for="category">Category</label>
       <select id="category" name="category" class="form-control">
-          <option value="0">--Please Select--</option>
+          <option value="">--Please Select--</option>
           <?php foreach($categories as $category): ?>
           <option value="<?php echo $category->id; ?>"><?php echo $category->name; ?></option>
           <?php          endforeach; ?>
@@ -60,7 +60,7 @@
     
      <div class="form-group">
       <label for="type">Type</label>
-      <input type="radio" name="type" value="0"  /> Consumable
+      <input type="radio" name="type" value="0" checked="" /> Consumable
       <input type="radio" name="type" value="1" /> Unconsumable
      </div>      
       

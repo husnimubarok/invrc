@@ -36,6 +36,7 @@ class Inventories extends MY_Controller {
          $data['page_heading'] = 'Add Item Inventory';
         $this->form_validation->set_rules('code', $this->lang->line('code'), 'required|min_length[1]|max_length[20]');
         $this->form_validation->set_rules('name', $this->lang->line('name'), 'required|min_length[1]|max_length[20]');
+        $this->form_validation->set_rules('category', 'Category', 'required');
         
         if ($this->form_validation->run() == FALSE) { // First load, or problem with form
             $data['code'] = array('name' => 'code', 'class' => 'form-control', 'id' => 'code', 'value' => set_value('code', ''), 'maxlength'   => '100', 'size' => '35');
