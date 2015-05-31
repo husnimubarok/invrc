@@ -44,7 +44,7 @@
       <div class="form-group">
           <label for="items">Items</label>
           <select name="items" id="items" class="form-control">
-              <option value="0">--Please select--</option>
+              <option value="">--Please select--</option>
               <?php foreach($items as $item): ?>
               <option value="<?php echo $item->id; ?>"> <?php echo $item->name; ?> </option>
               <?php              endforeach; ?>
@@ -58,7 +58,7 @@
       <div class="form-group">
           <label for="user">Assigning To</label>
           <select name="user_id" id="user_id" class="form-control">
-              <option value="0">--Please select--</option>
+              <option value="">--Please select--</option>
               <?php              foreach ($users as $user): ?>
               <option value="<?php echo $user->id; ?>"><?php echo "{$user->firstname}  {$user->lastname}"; ?></option>
               <?php endforeach; ?>

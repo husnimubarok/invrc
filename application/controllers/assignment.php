@@ -34,6 +34,7 @@ class Assignment extends MY_Controller {
         $data['page_heading'] = 'Assigtment items for ';
                 
         $this->form_validation->set_rules('code','Code','required|min_length[1]|max_length[20]');
+        $this->form_validation->set_rules('user_id', 'user_id','required');
         if($this->form_validation->run()==FALSE) {
             
             $data['items'] = $this->msign->lItems();
@@ -51,6 +52,7 @@ class Assignment extends MY_Controller {
                 'assignment_date'=>date('Y-m-d', strtotime($this->input->post('assigningdate'))),
             );
             //print_r($data);        
+            
             $id=$this->msign->mAdd($data);
             if(!id){}
             else {
