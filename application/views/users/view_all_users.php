@@ -13,14 +13,14 @@
     	<?php if ($query->num_rows() > 0) : ?>
 			<?php foreach ($query->result() as $row) : ?>
 		        <tr>
-		          <td><?php echo $row->usr_id ; ?></td>
-		          <td><?php echo $row->usr_fname ; ?></td>
-		          <td><?php echo $row->usr_lname ; ?></td>
-		          <td><?php echo $row->usr_email ; ?></td>
+		          <td><?php echo $row->id ; ?></td>
+		          <td><?php echo $row->firstname ; ?></td>
+		          <td><?php echo $row->lastname ; ?></td>
+		          <td><?php echo $row->email ; ?></td>
 		          <td><?php echo anchor('users/edit_user/'.
-		            $row->usr_id,$this->lang->line('common_form_elements_action_edit')) . 
+		            $row->id,$this->lang->line('common_form_elements_action_edit')) . 
 		            ' ' . anchor('users/delete_user/'.
-		            $row->usr_id,$this->lang->line('common_form_elements_action_delete')) ; ?>
+		            $row->id,$this->lang->line('common_form_elements_action_delete')) ; ?>
 		      	  </td>
 		        </tr>	        
 		    <?php endforeach ; ?>

@@ -6,6 +6,7 @@ class Users extends MY_Controller {
     $this->load->helper('file'); // for html emails
     $this->load->model('Users_model');
     $this->load->model('Password_model');
+    
 
     if ( ($this->session->userdata('logged_in') == FALSE) || 
        ($this->session->userdata('usr_access_level') != 1) ) {
@@ -27,13 +28,13 @@ class Users extends MY_Controller {
     $this->form_validation->set_rules('usr_fname', $this->lang->line('usr_fname'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_lname', $this->lang->line('usr_lname'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_uname', $this->lang->line('usr_uname'), 'required|min_length[1]|max_length[125]');
-    $this->form_validation->set_rules('usr_email', $this->lang->line('usr_email'), 'required|min_length[1]|max_length[255]|valid_email|is_unique[users.usr_email]');
+    $this->form_validation->set_rules('usr_email', $this->lang->line('usr_email'), 'required|min_length[1]|max_length[255]|valid_email|is_unique[users.email]');
     $this->form_validation->set_rules('usr_confirm_email', $this->lang->line('usr_confirm_email'), 'required|min_length[1]|max_length[255]|valid_email|matches[usr_email]');
-    $this->form_validation->set_rules('usr_add1', $this->lang->line('usr_add1'), 'required|min_length[1]|max_length[125]');
+   /* $this->form_validation->set_rules('usr_add1', $this->lang->line('usr_add1'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_add2', $this->lang->line('usr_add2'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_add3', $this->lang->line('usr_add3'), 'required|min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_town_city', $this->lang->line('usr_town_city'), 'required|min_length[1]|max_length[125]');
-    $this->form_validation->set_rules('usr_zip_pcode', $this->lang->line('usr_zip_pcode'), 'required|min_length[1]|max_length[125]');
+    $this->form_validation->set_rules('usr_zip_pcode', $this->lang->line('usr_zip_pcode'), 'required|min_length[1]|max_length[125]');*/
     $this->form_validation->set_rules('usr_access_level', $this->lang->line('usr_access_level'), 'min_length[1]|max_length[125]');
     $this->form_validation->set_rules('usr_is_active', $this->lang->line('usr_is_active'), 'min_length[1]|max_length[1]|integer|is_natural');
 
@@ -45,11 +46,11 @@ class Users extends MY_Controller {
       $data['usr_uname'] = array('name' => 'usr_uname', 'class' => 'form-control', 'id' => 'usr_uname', 'value' => set_value('usr_uname', ''), 'maxlength'   => '100', 'size' => '35');
       $data['usr_email'] = array('name' => 'usr_email', 'class' => 'form-control', 'id' => 'usr_email', 'value' => set_value('usr_email', ''), 'maxlength'   => '100', 'size' => '35');
       $data['usr_confirm_email'] = array('name' => 'usr_confirm_email', 'class' => 'form-control', 'id' => 'usr_confirm_email', 'value' => set_value('usr_confirm_email', ''), 'maxlength'   => '100', 'size' => '35');
-      $data['usr_add1'] = array('name' => 'usr_add1', 'class' => 'form-control', 'id' => 'usr_add1', 'value' => set_value('usr_add1', ''), 'maxlength'   => '100', 'size' => '35');
-      $data['usr_add2'] = array('name' => 'usr_add2', 'class' => 'form-control', 'id' => 'usr_add2', 'value' => set_value('usr_add2', ''), 'maxlength'   => '100', 'size' => '35');
-      $data['usr_add3'] = array('name' => 'usr_add3', 'class' => 'form-control', 'id' => 'usr_add3', 'value' => set_value('usr_add3', ''), 'maxlength'   => '100', 'size' => '35');
-      $data['usr_town_city'] = array('name' => 'usr_town_city', 'class' => 'form-control', 'id' => 'usr_town_city', 'value' => set_value('usr_town_city', ''), 'maxlength'   => '100', 'size' => '35');
-      $data['usr_zip_pcode'] = array('name' => 'usr_zip_pcode', 'class' => 'form-control', 'id' => 'usr_zip_pcode', 'value' => set_value('usr_zip_pcode', ''), 'maxlength'   => '100', 'size' => '35');
+      //$data['usr_add1'] = array('name' => 'usr_add1', 'class' => 'form-control', 'id' => 'usr_add1', 'value' => set_value('usr_add1', ''), 'maxlength'   => '100', 'size' => '35');
+      //$data['usr_add2'] = array('name' => 'usr_add2', 'class' => 'form-control', 'id' => 'usr_add2', 'value' => set_value('usr_add2', ''), 'maxlength'   => '100', 'size' => '35');
+      //$data['usr_add3'] = array('name' => 'usr_add3', 'class' => 'form-control', 'id' => 'usr_add3', 'value' => set_value('usr_add3', ''), 'maxlength'   => '100', 'size' => '35');
+      //$data['usr_town_city'] = array('name' => 'usr_town_city', 'class' => 'form-control', 'id' => 'usr_town_city', 'value' => set_value('usr_town_city', ''), 'maxlength'   => '100', 'size' => '35');
+      //$data['usr_zip_pcode'] = array('name' => 'usr_zip_pcode', 'class' => 'form-control', 'id' => 'usr_zip_pcode', 'value' => set_value('usr_zip_pcode', ''), 'maxlength'   => '100', 'size' => '35');
       $data['usr_access_level'] = array(1=>1, 2=>2, 3=>3, 4=>4, 5=>5);
 
       $this->load->view('common/header', $data);
@@ -57,23 +58,19 @@ class Users extends MY_Controller {
       $this->load->view('users/new_user',$data);
       $this->load->view('common/footer', $data);
     } else { // Validation passed, now escape the data
+        $this->load->library('encrypt');
       $password = random_string('alnum', 8);
       $hash = $this->encrypt->sha1($password);  
 
       $data = array(
-        'usr_fname' => $this->input->post('usr_fname'),
-        'usr_lname' => $this->input->post('usr_lname'),
-        'usr_uname' => $this->input->post('usr_uname'),
-        'usr_email' => $this->input->post('usr_email'),
-        'usr_hash' => $hash,
-        'usr_add1' => $this->input->post('usr_add1'),
-        'usr_add2' => $this->input->post('usr_add2'),
-        'usr_add3' => $this->input->post('usr_add3'),
-        'usr_town_city' => $this->input->post('usr_town_city'),
-        'usr_zip_pcode' => $this->input->post('usr_zip_pcode'),
-        'usr_access_level' => $this->input->post('usr_access_level'),
-        'usr_is_active' => $this->input->post('usr_is_active')
-      );
+        'firstname' => $this->input->post('usr_fname'),
+        'lastname' => $this->input->post('usr_lname'),
+        'login' => $this->input->post('usr_uname'),
+        'email' => $this->input->post('usr_email'),
+        'password' => $hash,
+        'access_level' => $this->input->post('usr_access_level'),
+        'is_active' => $this->input->post('usr_is_active')
+      ); //print_r($data);
 
       if ($this->Users_model->process_create_user($data)) {
         $file = read_file('../views/email_scripts/welcome.txt');

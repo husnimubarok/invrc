@@ -9,7 +9,7 @@ class Password_model extends CI_Model {
 		$query = "SELECT COUNT(*) AS `count` 
 				  		FROM `users` 
 				  		WHERE `usr_pwd_change_code` = ?
-				  		AND `usr_email` = ? ";
+				  		AND `email` = ? ";
 
 		$res = $this->db->query($query, array($code, $email));
 

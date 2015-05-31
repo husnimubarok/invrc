@@ -6,7 +6,7 @@ class Signin_model extends CI_Model {
   } 
 
   public function does_user_exist($email) {
-    $this->db->where('usr_email', $email);
+    $this->db->where('email', $email);
     $query = $this->db->get('users');
     return $query;
   }

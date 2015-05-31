@@ -42,10 +42,10 @@ class Signin extends CI_Controller {
 
             // Generate hash from a their password
             $hash = $this->encrypt->sha1($password);
-
-            if ($row->usr_is_active != 0) { // See if the user is active or not
+            echo $hash;
+            if ($row->is_active != 0) { // See if the user is active or not
               // Compare the generated hash with that in the database
-              if ($hash != $row->usr_hash) {
+              if ($hash != $row->password) {
                 // Didn't match so send back to login
                 $data['login_fail'] = true;
                 $this->load->view('common/login_header');
@@ -53,10 +53,10 @@ class Signin extends CI_Controller {
                 $this->load->view('common/footer'); 
               } else {
                 $data = array(
-                    'usr_id' => $row->usr_id,
-                    'acc_id' => $row->acc_id,
-                    'usr_email' => $row->usr_email,
-                    'usr_access_level' => $row->usr_access_level,
+                    'usr_id' => $row->id,
+                    'acc_id' => $row->id,
+                    'usr_email' => $row->email,
+                    'usr_access_level' => $row->access_level,
                     'logged_in' => TRUE
                 );
 
