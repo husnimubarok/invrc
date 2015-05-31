@@ -24,6 +24,7 @@ class Assignment extends MY_Controller {
     
     public function index() {
          $data['page_heading']='List Inventory'; 
+        $data['lists']=$this->msign->mIndex();
         $this->load->view('common/header', $data);
         $this->load->view('nav/top_nav', $data);        
         $this->load->view('assignment/v_index', $data);

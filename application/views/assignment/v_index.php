@@ -14,3 +14,38 @@
  * facebook    : facebook.com/salmandriva
  */
 ?>
+<h2><?php echo $page_heading ; ?></h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+          <th>code</th>
+          <th>Name</th>
+          <th>SN</th>
+          <th>Assigned Date</th>
+          <th>Assigned To</th>
+	  <td>Actions</td>                    
+        </tr>
+    </thead>	
+    <tbody>
+    	<?php if (count($lists) > 0) : ?>
+			<?php foreach ($lists as $row) : ?>
+		        <tr>
+		          <td><?php echo $row->code; ?></td>
+		          <td><?php echo $row->name ; ?></td>
+		          <td><?php echo $row->sn ; ?></td>
+		          <td><?php echo $row->assignment_date ; ?></td>
+                          <td><?php echo "{$row->firstname} {$row->lastname}" ; ?></td>
+		          <td><?php echo anchor('assignment/edit/'.
+		            $row->id,$this->lang->line('common_form_elements_action_edit')) . 
+		            ' ' . anchor('assignment/delete/'.
+		            $row->id,$this->lang->line('common_form_elements_action_delete')) ; ?>
+		      	  </td>
+		        </tr>	        
+		    <?php endforeach ; ?>
+		<?php else : ?>
+	        <tr>
+	          <td colspan="5" class="info">No inventory here!</td>
+	        </tr>			
+		<?php endif; ?>
+	</tbody>
+</table>

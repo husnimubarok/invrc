@@ -36,6 +36,7 @@ class Assignment_model extends CI_Model {
   }
   public function mView($id) {
       $sql = "SELECT 
+                a.id,
                 b.code,
                 b.name,
                 b.sn,
@@ -53,6 +54,7 @@ class Assignment_model extends CI_Model {
   }
   public function mIndex() {
       $sql = "SELECT 
+                a.id,
                 b.code,
                 b.name, b.sn,
                 a.`assignment_date`,
