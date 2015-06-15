@@ -76,5 +76,47 @@ class Assignment extends MY_Controller {
         $this->load->view('assignment/v_view',$data);
         $this->load->view('common/footer', $data);
     }
+    
+    public function edit() {
+        $data['page_heading'] = 'Assigtment items for ';
+                
+        $this->form_validation->set_rules('code','Code','required|min_length[1]|max_length[20]');
+        $this->form_validation->set_rules('user_id', 'user_id','required');
+        
+        if($this->input->post()) {
+            $id = $this->input->post("id");
+        }
+        else {
+            $id=$this->uri->segment(3);
+        }
+        
+        if($this->form_validation->run()==FALSE) {
+            
+            $data['items'] = $this->msign->lItems();
+            $data['users'] = $this->msign->lUsers();
+            
+            $ass=$this->msign->mView($id);
+            $data['ass']=$ass[0];
+            
+            $this->load->view('common/header', $data);
+            $this->load->view('nav/top_nav', $data);        
+            $this->load->view('assignment/v_edit', $data);
+            $this->load->view('common/footer', $data);
+        }
+        else {
+            $data=array(
+                'inventory_id'=>$this->input->post('items'),
+                'user_id'=>$this->input->post('user_id'),
+                'assignment_date'=>date('Y-m-d', strtotime($this->input->post('assigningdate'))),
+            );
+            //print_r($data);        
+            
+            $id=$this->msign->mEdit($id, $data);
+            if(!id){}
+            else {
+                redirect(base_url()."index.php/assignment/view/{$id}");
+            }
+        }
+    }
 }
 ?>

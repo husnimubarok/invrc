@@ -37,8 +37,7 @@
                           <td><?php echo "{$row->firstname} {$row->lastname}" ; ?></td>
 		          <td><?php echo anchor('assignment/edit/'.
 		            $row->id,$this->lang->line('common_form_elements_action_edit')) . 
-		            ' ' . anchor('assignment/delete/'.
-		            $row->id,$this->lang->line('common_form_elements_action_delete')) ; ?>
+		            ' &nbsp;' . "<a href='assignment/delete/{$row->id}' onClick='javacript: return confirm('are you sure to delete this data');'>Delete</a>" ; ?>
 		      	  </td>
 		        </tr>	        
 		    <?php endforeach ; ?>

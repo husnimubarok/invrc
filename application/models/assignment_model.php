@@ -37,6 +37,8 @@ class Assignment_model extends CI_Model {
   public function mView($id) {
       $sql = "SELECT 
                 a.id,
+                a.inventory_id,
+                a.user_id,
                 b.code,
                 b.name,
                 b.sn,
@@ -69,6 +71,14 @@ class Assignment_model extends CI_Model {
       $query = $this->db->query($sql);
       return $query->result();
   }
+  function mEdit($id, $data=array()){
+        $this->db->where("id", $id);
+        $this->db->update("assignment", $data);
+        if($this->db->affected_rows() > 0) {
+            return true;
+        }
+        return false;
+    }
   public function mAdd($data=array()) {
       if($this->db->insert('assignment', $data)){
           return $this->db->insert_id();
