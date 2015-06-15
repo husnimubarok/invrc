@@ -40,10 +40,9 @@
                           <td><?php echo ($row->type==0) ? "consumable" : "unconsumable";?></td>
                           <th><?php echo date('d-m-Y', strtotime($row->purchase_date)); ?></th>
                           <th><?php echo $row->purchase_price; ?></th>
-		          <td><?php echo anchor('users/edit/'.
-		            $row->id,$this->lang->line('common_form_elements_action_edit')) . 
-		            ' ' . anchor('users/delete/'.
-		            $row->id,$this->lang->line('common_form_elements_action_delete')) ; ?>
+		          <td><?php echo anchor('inventories/edit/'.
+		            $row->id,$this->lang->line('common_form_elements_action_edit'))?>
+		            &nbsp <a href="<?php echo  base_url(); ?>index.php/inventories/delete/<?php echo $row->id; ?>" onClick="javacript: return confirm('are you sure to delete this data');" >Delete</a>
 		      	  </td>
 		        </tr>	        
 		    <?php endforeach ; ?>

@@ -33,7 +33,7 @@ class Inventories extends MY_Controller {
     }
     
     function add() {
-         $data['page_heading'] = 'Add Item Inventory';
+        $data['page_heading'] = 'Add Item Inventory';
         $this->form_validation->set_rules('code', $this->lang->line('code'), 'required|min_length[1]|max_length[20]');
         $this->form_validation->set_rules('name', $this->lang->line('name'), 'required|min_length[1]|max_length[20]');
         $this->form_validation->set_rules('category', 'Category', 'required');
@@ -42,8 +42,8 @@ class Inventories extends MY_Controller {
             $data['code'] = array('name' => 'code', 'class' => 'form-control', 'id' => 'code', 'value' => set_value('code', ''), 'maxlength'   => '100', 'size' => '35');
             $data['name'] = array('name' => 'name', 'class' => 'form-control', 'id' => 'name', 'value' => set_value('name', ''), 'maxlength'   => '100', 'size' => '35');
             $data['sn'] = array('name' => 'sn', 'class' => 'form-control', 'id' => 'sn', 'value' => set_value('sn', ''), 'maxlength'   => '100', 'size' => '35');
-            $data['usr_uname'] = array('name' => 'usr_uname', 'class' => 'form-control', 'id' => 'usr_uname', 'value' => set_value('usr_uname', ''), 'maxlength'   => '100', 'size' => '35');
-            $data['usr_email'] = array('name' => 'usr_email', 'class' => 'form-control', 'id' => 'usr_email', 'value' => set_value('usr_email', ''), 'maxlength'   => '100', 'size' => '35');
+            $data['firstname'] = array('name' => 'firstname', 'class' => 'form-control', 'id' => 'firstname', 'value' => set_value('firstname', ''), 'maxlength'   => '100', 'size' => '35');
+            $data['lastname'] = array('name' => 'lastname', 'class' => 'form-control', 'id' => 'lastname', 'value' => set_value('lastname', ''), 'maxlength'   => '100', 'size' => '35');
             $data['usr_confirm_email'] = array('name' => 'usr_confirm_email', 'class' => 'form-control', 'id' => 'usr_confirm_email', 'value' => set_value('usr_confirm_email', ''), 'maxlength'   => '100', 'size' => '35');
             //$data['usr_add1'] = array('name' => 'usr_add1', 'class' => 'form-control', 'id' => 'usr_add1', 'value' => set_value('usr_add1', ''), 'maxlength'   => '100', 'size' => '35');
             //$data['usr_add2'] = array('name' => 'usr_add2', 'class' => 'form-control', 'id' => 'usr_add2', 'value' => set_value('usr_add2', ''), 'maxlength'   => '100', 'size' => '35');
@@ -82,6 +82,66 @@ class Inventories extends MY_Controller {
         }
            
     }
+    function edit()
+    {
+        $data['page_heading'] = 'Edit Inventory';
+        $this->form_validation->set_rules('code', $this->lang->line('code'), 'required|min_length[1]|max_length[20]');
+        $this->form_validation->set_rules('name', $this->lang->line('name'), 'required|min_length[1]|max_length[20]');
+        $this->form_validation->set_rules('category', 'Category', 'required');
+        
+        if ($this->input->post()) {
+            $id = $this->input->post('invid');
+        } else {
+            $id = $this->uri->segment(3); 
+        }
+        
+        if ($this->form_validation->run() == FALSE) { // First load, or problem with form
+            $data['code'] = array('name' => 'code', 'class' => 'form-control', 'id' => 'code', 'value' => set_value('code', ''), 'maxlength'   => '100', 'size' => '35');
+            $data['name'] = array('name' => 'name', 'class' => 'form-control', 'id' => 'name', 'value' => set_value('name', ''), 'maxlength'   => '100', 'size' => '35');
+            $data['sn'] = array('name' => 'sn', 'class' => 'form-control', 'id' => 'sn', 'value' => set_value('sn', ''), 'maxlength'   => '100', 'size' => '35');
+            $data['name'] = array('name' => 'name', 'class' => 'form-control', 'id' => 'name', 'value' => set_value('firstname', ''), 'maxlength'   => '100', 'size' => '35');
+            $data['purchase_date'] = array('name' => 'purchase_date', 'class' => 'form-control', 'id' => 'purchase_date', 'value' => set_value('lastname', ''), 'maxlength'   => '100', 'size' => '35');
+            $data['purchase_price'] = array('name' => 'purchase_price', 'class' => 'form-control', 'id' => 'purchase_price', 'value' => set_value('lastname', ''), 'maxlength'   => '100', 'size' => '35');
+            /*
+            if($id==0) {
+                redirect(base_url() . "index.php/inventories/index");
+            }
+            */
+            
+            $cat=$this->mcat->mView($id);
+            $data['list']=$cat[0];
+            
+            $data['invid']=$id;
+            $data['categories'] = $this->mcat->listCategory();
+            $data['status'] = $this->mcat->listStatus();
+            $data['userlogin']=$this->session->userdata('usr_id');           
+            $this->load->view('common/header', $data);
+            $this->load->view('nav/top_nav', $data);
+            $this->load->view('inventories/v_edit',$data);
+            $this->load->view('common/footer', $data);
+        }
+        else {
+            $data = array(
+                    'code'=>$this->input->post('code'),
+                    'category_id'=>$this->input->post('category'),
+                    'name'=>$this->input->post('name'),
+                    'sn'=>$this->input->post('sn'),
+                    'type'=>$this->input->post('type'),
+                    'status'=>$this->input->post('status'),
+                    'purchase_date'=>date('Y-m-d', strtotime($this->input->post('purchase_date'))),
+                    'purchase_price'=>$this->input->post('purchase_price'),
+                    'user_id'=>$this->input->post('userlogin')
+                );
+            //print_r($data);
+            
+            if($this->mcat->mEdit($id, $data)) {
+                redirect(base_url() . "index.php/inventories/index");
+            }
+            else {
+                redirect(base_url() . "index.php/inventories/edit/{$id}");
+            }
+        }
+    }
     function view($id=0) {
         if($id==0) {
             redirect(base_url() . "index.php/inventories/index");
@@ -89,11 +149,19 @@ class Inventories extends MY_Controller {
         
         $view = $this->mcat->mView($id);
         $data['list'] = $view[0];
-            $this->load->view('common/header', $data);
-            $this->load->view('nav/top_nav', $data);
-            $this->load->view('inventories/v_view',$data);
-            $this->load->view('common/footer', $data);
+        $this->load->view('common/header', $data);
+        $this->load->view('nav/top_nav', $data);
+        $this->load->view('inventories/v_view',$data);
+        $this->load->view('common/footer', $data);
     }
-    
+    function delete($id=0) {
+        if($id==0) {
+            redirect(base_url() . "index.php/inventories/index");
+        }
+        
+        if($this->mcat->mDelete($id)) {
+            redirect(base_url() . "index.php/inventories/index");
+        }
+    }
 }
 ?>

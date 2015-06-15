@@ -31,8 +31,17 @@ class Inventory_model extends CI_Model
         return $query->result();
     }
     function mAdd($data=array()) {
+        
         if($this->db->insert('inventory', $data)) {
             return $this->db->insert_id();
+        }
+        return false;
+    }
+    function mEdit($id, $data=array()){
+        $this->db->where("id", $id);
+        $this->db->update("inventory", $data);
+        if($this->db->affected_rows() > 0) {
+            return true;
         }
         return false;
     }
@@ -55,7 +64,7 @@ class Inventory_model extends CI_Model
                         LEFT JOIN `status` c 
                           ON a.`status` = c.`id` 
                         LEFT JOIN `users` u 
-                          ON a.`user_id` = u.`id`  ";
+                          ON a.`user_id` = u.`id` where a.is_deleted='n' ";
         $query = $this->db->query($sql);
         return $query->result();
     }
@@ -64,8 +73,10 @@ class Inventory_model extends CI_Model
         $sql = "SELECT 
                         a.`code`,
                         a.`name`,
+                        b.id catid,
                         b.name category,
                         a.`sn`,
+                        c.id statid,
                         c.`name` `status`,
                         a.`type`,
                         a.`purchase_date`,
@@ -82,6 +93,14 @@ class Inventory_model extends CI_Model
                           ON a.`user_id` = u.`id`  where a.id={$id} ";
         $query = $this->db->query($sql);
         return $query->result();
+    }
+    function mDelete($id) {
+        $this->db->where('id',$id);
+        $this->db->update('inventory', array('is_deleted'=>'y'));
+        if($this->db->affected_rows() > 0) {
+            return true;
+        }
+        return false;
     }
 }
 ?>
